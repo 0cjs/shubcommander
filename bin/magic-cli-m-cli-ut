@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo COMMAND_BASE_DIR=XXX # "$COMMAND_BASE_DIR" Can't do this 'till we fix test
+echo COMMAND_BASE_CMD="$COMMAND_BASE_CMD"
+echo COMMAND_BASE_SUB="$COMMAND_BASE_SUB"
+
+echo 0: "$(basename "$0")"
+i=1; while [ -n "$1" ]; do echo "$i: $1"; shift; i=$(($i+1)); done

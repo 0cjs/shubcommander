@@ -1,3 +1,7 @@
 #!/bin/sh
 
-echo Write me!
+export COMMAND_BASE_DIR="$(cd "$(dirname $0)" && pwd -P)"
+export COMMAND_BASE_CMD="$(basename "$0")"
+export COMMAND_BASE_SUB="$1"; shift
+
+exec "$COMMAND_BASE_DIR/$COMMAND_BASE_CMD-$COMMAND_BASE_SUB" "$@"
