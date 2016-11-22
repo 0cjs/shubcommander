@@ -4,4 +4,13 @@ export COMMAND_BASE_DIR="$(cd "$(dirname $0)" && pwd -P)"
 export COMMAND_BASE_CMD="$(basename "$0")"
 export COMMAND_BASE_SUB="$1"; shift
 
+# XXX Here we should find the subcommand in $PATH. But for the moment,
+# we only run subcommands in the same directory as the master command.
+command="$COMMAND_BASE_DIR/$COMMAND_BASE_CMD-$COMMAND_BASE_SUB"
+[ -x "$command" ] || {
+    echo 1>&2 "$COMMAND_BASE_CMD: $COMMAND_BASE_SUB: Not a subcommand."
+    echo 1>&2 "Type just '$COMMAND_BASE_CMD' for help."
+    exit 127
+}
+
 exec "$COMMAND_BASE_DIR/$COMMAND_BASE_CMD-$COMMAND_BASE_SUB" "$@"

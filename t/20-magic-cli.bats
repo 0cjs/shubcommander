@@ -1,6 +1,15 @@
 load 'test_helper/bats-support/load'
 load 'test_helper/bats-assert/load'
 
+@test "shubcommand not-a-command" {
+    run bin/shubcommand not-a-command
+    assert_failure 127
+    assert_output <<____
+shubcommand: not-a-command: Not a subcommand.
+Type just 'shubcommand' for help.
+____
+}
+
 @test "shubcommand unit-test" {
     run bin/shubcommand shbcmd-unit-test "p 1" p2
     assert_success
