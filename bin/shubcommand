@@ -1,7 +1,18 @@
 #!/bin/sh
 
+echoe() { echo 2>&1 "$@"; }
+
+top_level_usage() {
+    echoe "Usage: shubcommand <command> [<args>]"
+    echoe
+    echoe "Commands:"
+    echoe "  XXX need to print out commands here"
+    exit 1
+}
+
 export COMMAND_BASE_DIR="$(cd "$(dirname $0)" && pwd -P)"
 export COMMAND_BASE_CMD="$(basename "$0")"
+[ -z "$1" ] && top_level_usage
 export COMMAND_BASE_SUB="$1"; shift
 
 # XXX Here we should find the subcommand in $PATH. But for the moment,

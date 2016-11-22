@@ -23,5 +23,16 @@ COMMAND_BASE_SUB=shbcmd-unit-test
 ____
 }
 
+@test "shubcommand no-arg (help)" {
+    run bin/shubcommand
+    assert_failure 1
+    assert_output <<____
+Usage: shubcommand <command> [<args>]
+
+Commands:
+  XXX need to print out commands here
+____
+}
+
 # XXX Need to test that this stuff works in dirs with,
 #     e.g., spaces in the names, or even spaces in the command name.
